@@ -161,6 +161,31 @@ void test_ft_memset()
 	}
 }
 
+void test_ft_strsplit()
+{
+	char *str = "****les**etudiants***sont*****la*******";
+	char **tab;
+	int i;
+
+	printf("%s\n", BANNER);
+	printf("Test de ft_strsplit\n");	
+	tab = ft_strsplit(str, '*');
+	if (tab == NULL)
+	{
+		printf("echec allocation de memoire\n");
+	}
+	else
+	{
+		i = 0;
+		while (tab[i])
+		{
+			printf("%s\n",tab[i]);
+			i++;
+		}
+		
+	}
+}
+
 int	main(int argc, char ** argv)
 {
 	if (argc != 1)
@@ -174,5 +199,6 @@ int	main(int argc, char ** argv)
 	test_ft_bzero();
 	test_ft_strncpy();
 	test_ft_itoa();
+	test_ft_strsplit();
 	return (0);
 }
