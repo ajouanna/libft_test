@@ -114,6 +114,22 @@ void print_result(int val, char *res)
 	ft_putchar('\n');
 }
 
+void 	test_ft_atoi()
+{
+	char *str;
+	int val;
+	int ft_val;
+
+	printf("%s\n", BANNER);
+	ft_putstr("Testing ft_atoi\n");
+
+	str = "9223372036854775808";
+	val = atoi(str);
+	ft_val = ft_atoi(str);
+	printf("atoi(%s)=%d\n", str, val);
+	printf("ft_atoi(%s)=%d\n", str, ft_val);
+}
+
 void	test_ft_itoa()
 {
 	int val;
@@ -198,6 +214,7 @@ int	main(int argc, char ** argv)
 	test_ft_memccpy();
 	test_ft_bzero();
 	test_ft_strncpy();
+	test_ft_atoi();
 	test_ft_itoa();
 	test_ft_strsplit();
 	return (0);
