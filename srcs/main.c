@@ -39,7 +39,7 @@ void test_ft_memcpy()
 
 /*
  ** must test the return code
-*/
+ */
 
 void test_ft_memccpy()
 {
@@ -60,7 +60,7 @@ void test_ft_memccpy()
 	printf("res apres ft_memccpy :\n");
 	print_binary_string(res, 10);
 }
-	
+
 void test_ft_strncpy()
 {
 	char *s1 = "11111";
@@ -198,9 +198,34 @@ void test_ft_strsplit()
 			printf("%s\n",tab[i]);
 			i++;
 		}
-		
+
 	}
 }
+
+void test_ft_strlcat()
+{
+	size_t max_size;
+
+	printf("%s\n", BANNER);
+	printf("Test de ft_strlcat\n");	
+	max_size = 9;
+
+	size_t size=0;
+	while (size <= max_size)
+	{
+		char *src = "4567";
+		char dest[100] = "";
+		char ft_dest[100] = "";
+		size_t res;
+		size_t ft_res;
+		res = strlcat(dest, src, size);
+		ft_res = ft_strlcat(ft_dest, src, size);
+		printf("strlcat pour src=%s, size = %zu : dest=%s et res=%zu\n",src, size, dest, res); 
+		printf("ft_strlcat pour src=%s, size = %zu : dest=%s et res=%zu\n",src, size, ft_dest, ft_res); 
+		size++;
+	}
+}
+
 
 int	main(int argc, char ** argv)
 {
@@ -217,5 +242,6 @@ int	main(int argc, char ** argv)
 	test_ft_atoi();
 	test_ft_itoa();
 	test_ft_strsplit();
+	test_ft_strlcat();
 	return (0);
 }
