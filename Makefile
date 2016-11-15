@@ -2,7 +2,7 @@ NAME = test
 SRC = ./srcs
 INC = ./includes
 LIBFT_PATH = ../libft
-LIBFT_INC = $(LIBFT_PATH)/includes
+LIBFT_INC = $(LIBFT_PATH)
 OBJ = .
 
 LIST_SRC = $(SRC)/*.c

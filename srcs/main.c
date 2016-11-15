@@ -204,6 +204,7 @@ void test_ft_strsplit()
 
 void test_ft_strlcat()
 {
+/* ne marche pas sous Linux
 	size_t max_size;
 
 	printf("%s\n", BANNER);
@@ -224,6 +225,109 @@ void test_ft_strlcat()
 		printf("ft_strlcat pour src=%s, size = %zu : dest=%s et res=%zu\n",src, size, ft_dest, ft_res); 
 		size++;
 	}
+	*/
+}
+
+t_list *cp_elem_lst(t_list *elem)
+{
+	t_list *cp;
+	void *content_cp;
+
+	cp = NULL;
+	if (elem)
+	{
+		content_cp = ft_memalloc(elem->content_size);
+		content_cp = ft_memcpy(content_cp, elem->content, elem->content_size);
+
+		cp = ft_lstnew(content_cp, elem->content_size);
+	}
+	return (cp);
+}
+
+
+// pour les besoins de mes tests, le contenu ser tjrs une chaine 
+// de caracteres C
+void	affiche_content(void *p, size_t size)
+{
+	printf("content=%s\n",(p) ? (char *)p : "(null)");
+	printf("content_size=%zu\n",size);
+}
+
+// pour les besoins de mes tests, le contenu ser tjrs une chaine 
+// de caracteres C
+void affiche_elem_lst(t_list *lst)
+{
+	if (lst)
+	{
+		affiche_content(lst->content,lst->content_size);
+		printf("next is %s\n\n",(lst->next)? "not null" : "null");
+	}
+	else
+		printf("affiche_elem_lst : cannot display, lst parameter is null\n");
+}
+
+void affiche_lst(t_list *lst)
+{
+	t_list *pt;
+
+	pt = lst;
+	while (pt)
+	{
+		affiche_elem_lst(pt);
+		pt = pt->next;
+	}
+}
+
+void test_ft_lst()
+{
+	t_list *lst;
+	t_list *lst1;
+	t_list *lst2;
+	t_list *map;
+	char *contenu;
+
+	printf("%s\n", BANNER);
+	printf("Test de ft_lstnew\n");	
+	contenu = "aaaaaaa";
+	lst = ft_lstnew(contenu, ft_strlen(contenu));
+	printf("%s\n", "Contenu de lst apres ft_lstnew");
+	affiche_lst(lst);
+
+	printf("%s\n", BANNER);
+	printf("Test de ft_lstadd\n");	
+	contenu = "bbbbbb";
+	lst1 = ft_lstnew(contenu, ft_strlen(contenu));
+	ft_lstadd(&lst, lst1);
+	contenu = "ccccc";
+	lst2 = ft_lstnew(contenu, ft_strlen(contenu));
+	ft_lstadd(&lst1, lst2);
+	printf("%s\n", "Contenu de lst2 apres ft_lstadd");
+	affiche_lst(lst2);
+
+	printf("%s\n", BANNER);
+	printf("Test de ft_lstiter\n");	
+	ft_lstiter(lst2, &affiche_elem_lst);
+
+	printf("%s\n", BANNER);
+	printf("Test de ft_lstmap\n");	
+	map = ft_lstmap(lst2, cp_elem_lst);
+	printf("%s\n", "Contenu de map apres ft_lstmap");
+	affiche_lst(map);
+
+	printf("%s\n", BANNER);
+	printf("Test de ft_lstdelone\n");	
+	ft_lstdelone(&lst2,affiche_content);
+	printf("%s\n", "Contenu de lst2 apres ft_lstdelone");
+	affiche_lst(lst2);
+
+	printf("%s\n", BANNER);
+	printf("Test de ft_del\n");	
+	printf("%s\n", "Contenu de lst1 avant ft_lstdel");
+	affiche_lst(lst1);
+	printf("%s\n", "Appel de ft_lstdel");
+	ft_lstdel(&lst1,affiche_content);
+	printf("%s\n", "Contenu de lst1 apres ft_lstdel");
+	affiche_lst(lst1);
 }
 
 
@@ -243,5 +347,6 @@ int	main(int argc, char ** argv)
 	test_ft_itoa();
 	test_ft_strsplit();
 	test_ft_strlcat();
+	test_ft_lst();
 	return (0);
 }
