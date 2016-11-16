@@ -123,7 +123,19 @@ void 	test_ft_atoi()
 	printf("%s\n", BANNER);
 	ft_putstr("Testing ft_atoi\n");
 
-	str = "9223372036854775808";
+	str = "+-1";
+	val = atoi(str);
+	ft_val = ft_atoi(str);
+	printf("atoi(%s)=%d\n", str, val);
+	printf("ft_atoi(%s)=%d\n", str, ft_val);
+
+	str = "-1";
+	val = atoi(str);
+	ft_val = ft_atoi(str);
+	printf("atoi(%s)=%d\n", str, val);
+	printf("ft_atoi(%s)=%d\n", str, ft_val);
+
+	str = "\200123";
 	val = atoi(str);
 	ft_val = ft_atoi(str);
 	printf("atoi(%s)=%d\n", str, val);
@@ -289,17 +301,17 @@ void test_ft_lst()
 	printf("%s\n", BANNER);
 	printf("Test de ft_lstnew\n");	
 	contenu = "aaaaaaa";
-	lst = ft_lstnew(contenu, ft_strlen(contenu));
+	lst = ft_lstnew(contenu, 1 + ft_strlen(contenu));
 	printf("%s\n", "Contenu de lst apres ft_lstnew");
 	affiche_lst(lst);
 
 	printf("%s\n", BANNER);
 	printf("Test de ft_lstadd\n");	
 	contenu = "bbbbbb";
-	lst1 = ft_lstnew(contenu, ft_strlen(contenu));
+	lst1 = ft_lstnew(contenu, 1 + ft_strlen(contenu));
 	ft_lstadd(&lst, lst1);
 	contenu = "ccccc";
-	lst2 = ft_lstnew(contenu, ft_strlen(contenu));
+	lst2 = ft_lstnew(contenu, 1 + ft_strlen(contenu));
 	ft_lstadd(&lst1, lst2);
 	printf("%s\n", "Contenu de lst2 apres ft_lstadd");
 	affiche_lst(lst2);
@@ -316,9 +328,9 @@ void test_ft_lst()
 
 	printf("%s\n", BANNER);
 	printf("Test de ft_lstdelone\n");	
-	ft_lstdelone(&lst2,affiche_content);
-	printf("%s\n", "Contenu de lst2 apres ft_lstdelone");
-	affiche_lst(lst2);
+	ft_lstdelone(&map,affiche_content);
+	printf("%s\n", "Contenu de map apres ft_lstdelone");
+	affiche_lst(map);
 
 	printf("%s\n", BANNER);
 	printf("Test de ft_del\n");	
